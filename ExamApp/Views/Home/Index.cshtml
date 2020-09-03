@@ -1,0 +1,291 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<style>
+    .question-label{
+        width:10%;
+        display:inline;
+        margin:2px;
+    }
+    .question-input {
+        width: 85%;
+        display: inline;
+        margin: 2px;
+    }
+    .question-box{
+        margin:2px;
+    }
+</style>
+<div class="text-center">
+
+    <form action="/Home/CreateExam" method="post" id="CreateExamForm">
+        <div class="form-group">
+            <label>Yazı</label>
+            <input type="hidden" name="Title" id="ExamTitle" value="" class="form-control"/>
+            <select name="Href"
+                    id="ddlExamTitles"
+                    class="form-control"
+                    asp-items="ViewBag.ExamTitles"></select>
+        </div>
+        <div class="form-group">
+            <label id="ExamTextLabel" class="text-justify"></label>
+            <input type="hidden" name="Text" id="ExamText" value="" />
+        </div>
+        @*Questions*@
+    <div class="form-group">
+
+        <div class="row">
+            <div class="col border question-box">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-2">
+                            <label for="Questions[0].Text">Soru 1</label>
+                        </div>
+                        <div class="col-10">
+                            <input name="Questions[0].Text" class="form-control">
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="row">
+                                <label for="Questions[0].A" class="question-label">A)</label>
+                                <input name="Questions[0].A" class="form-control question-input">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="row">
+                                <label for="Questions[0].B" class="question-label">B)</label>
+                                <input name="Questions[0].B" class="form-control question-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="row">
+                                <label for="Questions[0].C" class="question-label">C)</label>
+                                <input name="Questions[0].C" class="form-control question-input">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="row">
+                                <label for="Questions[0].D" class="question-label">D)</label>
+                                <input name="Questions[0].D" class="form-control question-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <select name="Questions[0].RightAnswer"
+                                id="ddlQuestions[0].RightAnswer"
+                                class="form-control">
+                            <option value="" disabled selected>Doğru Cevap Seç</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col border question-box">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-2">
+                            <label for="Questions[1].Text">Soru 2</label>
+                        </div>
+                        <div class="col-10">
+                            <input name="Questions[1].Text" class="form-control">
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="row">
+                                <label for="Questions[1].A" class="question-label">A)</label>
+                                <input name="Questions[1].A" class="form-control question-input">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="row">
+                                <label for="Questions[1].B" class="question-label">B)</label>
+                                <input name="Questions[1].B" class="form-control question-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="row">
+                                <label for="Questions[1].C" class="question-label">C)</label>
+                                <input name="Questions[1].C" class="form-control question-input">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="row">
+                                <label for="Questions[1].D" class="question-label">D)</label>
+                                <input name="Questions[1].D" class="form-control question-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <select name="Questions[1].RightAnswer"
+                                id="ddlQuestions[1].RightAnswer"
+                                class="form-control">
+                            <option value="" disabled selected>Doğru Cevap Seç</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col border question-box">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-2">
+                            <label for="Questions[2].Text">Soru 3</label>
+                        </div>
+                        <div class="col-10">
+                            <input name="Questions[2].Text" class="form-control">
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="row">
+                                <label for="Questions[2].A" class="question-label">A)</label>
+                                <input name="Questions[2].A" class="form-control question-input">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="row">
+                                <label for="Questions[2].B" class="question-label">B)</label>
+                                <input name="Questions[2].B" class="form-control question-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="row">
+                                <label for="Questions[2].C" class="question-label">C)</label>
+                                <input name="Questions[2].C" class="form-control question-input">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="row">
+                                <label for="Questions[2].D" class="question-label">D)</label>
+                                <input name="Questions[2].D" class="form-control question-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <select name="Questions[2].RightAnswer"
+                                id="ddlQuestions[2].RightAnswer"
+                                class="form-control">
+                            <option value="" disabled selected>Doğru Cevap Seç</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col border question-box">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-2">
+                            <label for="Questions[3].Text">Soru 4</label>
+                        </div>
+                        <div class="col-10">
+                            <input name="Questions[3].Text" class="form-control">
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="row">
+                                <label for="Questions[3].A" class="question-label">A)</label>
+                                <input name="Questions[3].A" class="form-control question-input">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="row">
+                                <label for="Questions[3].B" class="question-label">B)</label>
+                                <input name="Questions[3].B" class="form-control question-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="row">
+                                <label for="Questions[3].C" class="question-label">C)</label>
+                                <input name="Questions[3].C" class="form-control question-input">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="row">
+                                <label for="Questions[3].D" class="question-label">D)</label>
+                                <input name="Questions[3].D" class="form-control question-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <select name="Questions[3].RightAnswer"
+                                id="ddlQuestions[3].RightAnswer"
+                                class="form-control">
+                            <option value="" disabled selected>Doğru Cevap Seç</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+        <div class="form-group">
+            <button class="form-control btn-primary">Sınavı Oluştur</button>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    $(function () {
+
+        $("#ddlExamTitles").change(function () {
+            var href = "";
+            var title = "";
+            $("#ddlExamTitles option:selected").each(function () {
+                href += $(this)[0].value;
+                title += $(this)[0].textContent
+            });
+            $("#ExamTitle").val(title)
+            $.ajax({
+                url: "/Home/GetExamText",
+                type: "POST",
+                data: { href: href },
+                success: function (data) {
+                    var examText = $(data).find("p:not(p.related-cne-video-component__dek)")
+                    examText.find('a').removeAttr("href");
+                    examText.remove("em");
+                    $("#ExamTextLabel").html(examText);
+                    $("#ExamText").val($("#ExamTextLabel").html().toString());
+                }
+            });
+        });
+        $("#ddlExamTitles").change();
+
+        
+    });
+</script>

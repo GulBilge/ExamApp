@@ -1,0 +1,33 @@
+﻿@model List<QuestionsPartialViewModel>
+    <div class="row">
+        @foreach (var (item, index) in Model.WithIndex())
+        {
+
+            <div class="col-6 questions">
+                <div class="row">
+                    <span>@(index+1))</span>
+                    <label id="question-text"> @item.Text</label>
+                    <input id="QuestionId-@(index+1)" value="@item.QuestionId" hidden />
+                </div>
+                <div class="row">
+                    <input class="checkbox-question" type="radio" name="question@(index+1)" id="question@(index+1)-A" value="A">
+                    <label class="for-checkbox-question" for="question@(index+1)-A">
+                        <span data-hover="A) @item.A">A) @item.A</span>
+                    </label>
+                    <input class="checkbox-question" type="radio" name="question@(index+1)" id="question@(index+1)-B" value="B">
+                    <label class="for-checkbox-question" for="question@(index+1)-B">
+                        <span data-hover="B) @item.B">B) @item.B</span>
+                    </label>
+                    <input class="checkbox-question" type="radio" name="question@(index+1)" id="question@(index+1)-C" value="C">
+                    <label class="for-checkbox-question" for="question@(index+1)-C">
+                        <span data-hover="C) @item.C">C) @item.C</span>
+                    </label>
+                    <input class="checkbox-question" type="radio" name="question@(index+1)" id="question@(index+1)-D" value="D">
+                    <label class="for-checkbox-question" for="question@(index+1)-D">
+                        <span data-hover="D) @item.D">D) @item.D</span>
+                    </label>
+                </div>
+            </div>
+        }
+
+    </div>

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<ExamApp.Models.Exam>
+
+@{
+    ViewData["Title"] = "Sınav Listesi";
+}
+
+<h1>Sınav Listesi</h1>
+<p>
+    <a asp-action="Index">Yeni Sınav Oluştur</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+
+            </th>
+            <th>
+
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var (item, index) in Model.Select((v, i) => (v, i)))
+        {
+            <tr>
+                <td>
+                    @(index+1)
+                </td>
+                <td>
+
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+                <td>
+                    @Html.ActionLink("Sınavı Başlat", "StartExam", new { id = item.Id }) |
+                    @Html.ActionLink("Sil", "Delete", new { id = item.Id })
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

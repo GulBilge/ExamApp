@@ -1,0 +1,135 @@
+﻿@model ExamApp.Models.Exam
+
+@{
+    ViewData["Title"] = "Sınav";
+}
+<style>
+    [type="radio"]:checked,
+    [type="radio"]:not(:checked) {
+        position: absolute;
+        left: -9999px;
+        width: 0;
+        height: 0;
+        visibility: hidden;
+    }
+
+    .checkbox-question:checked + label,
+    .checkbox-question:not(:checked) + label {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+        border:1px solid lightgray;
+        width:98%;
+        margin:2%;
+    }
+
+    .checkbox-question:not(:checked) + label {
+        background-color: transparent;
+    }
+
+    .checkbox-question:checked + label {
+        background-color: yellow;
+    }
+
+    .checkbox-question:not(:checked) + label:hover {
+        /*box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);*/
+    }
+
+    .checkbox-question:checked + label::before,
+    .checkbox-question:not(:checked) + label::before {
+        background-color: yellow;
+    }
+
+    .checkbox-question:checked + label span,
+    .checkbox-question:not(:checked) + label span {
+        position: relative;
+        display: block;
+    }
+
+        .checkbox-question:checked + label span::before,
+        .checkbox-question:not(:checked) + label span::before {
+            position: absolute;
+            content: attr(data-hover);
+            color: black;
+        }
+
+        .checkbox-question:not(:checked) + label span::before {
+            max-height: 0;
+        }
+
+        .checkbox-question:checked + label span::before {
+            max-height: 100%;
+        }
+
+    .checkbox-question:not(:checked) + label {
+        background-color: transparent;
+    }
+    .rightAnswer{
+        background-color:green !important;
+    }
+    .wrongAnswer{
+        background-color:red !important;
+    }
+    .questions{
+        border:1px solid lightgray;
+    }
+</style>
+<h1>Sınav</h1>
+
+<div>
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="row">
+        <div class="col-10 text-center">
+            <h2> @Html.DisplayFor(model => model.Title)</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            @Html.Raw(Model.Text)
+        </div>
+
+    </div>
+    @*Questions*@
+    <!--
+                        -->
+    <div id="QuestionsPartialViewId">
+    </div>
+    <button id="btnCompleteExam" class="form-control btn-primary" type="button">Sınavı Tamamla</button>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        //$("input[name='question1']:checked").val()
+        var examId = $("#Id").val();
+        $.ajax({
+            url: "/Home/GetQuestions",
+            type: "POST",
+            data: { ExamId: examId },
+            success: function (data) {
+                $("#QuestionsPartialViewId").html(data);
+            }
+        });
+
+        $("#btnCompleteExam").click(function () {
+            $.ajax({
+                url: "/Home/GetRightAnswers",
+                type: "POST",
+                data: { ExamId: examId },
+                success: function (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        var input = $("input[name='question" + (i + 1) + "']:checked");
+                        var label = $("input[name='question" + (i + 1) + "']:checked +label");
+                        $("input[name='question" + (i + 1) + "'] +label").removeClass("rightAnswer").removeClass("wrongAnswer");
+                        if (input.val() == data[i]) {
+                            label.addClass("rightAnswer");
+                            
+                        } else {
+                            label.addClass("wrongAnswer");
+                        }
+                    }
+                }
+            });
+        })
+    });
+</script>
